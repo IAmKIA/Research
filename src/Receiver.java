@@ -1,3 +1,5 @@
+import com.sun.javafx.geom.Vec2f;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -5,10 +7,12 @@ import java.net.SocketException;
 
 public class Receiver extends Thread{
     DatagramSocket socket;
+    Vec2f other;
     public Receiver() {
         super("Receiver");
+        other = new Vec2f(0,0);
         try {
-            socket = new DatagramSocket();
+            socket = new DatagramSocket(4041);
         } catch (SocketException e) {
             e.printStackTrace();
         }
@@ -24,7 +28,8 @@ public class Receiver extends Thread{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(new String(packet.getData()));
+            message = new String(packet.getData());
+            other = new Vec2f(Float.parseFloat(message.split(",")[0]),Float.parseFloat(message.split(",")[1]));
         }
     }
 }

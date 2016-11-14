@@ -8,6 +8,7 @@ import java.net.InetAddress;
 public class Main extends PApplet{
     InetAddress sendTo;
     DatagramSocket socket;
+    Receiver reciever;
     public static void main(String[] args) {
         PApplet.main("Main");
     }
@@ -21,20 +22,26 @@ public class Main extends PApplet{
     @Override
     public void setup() {
         try {
-            sendTo= InetAddress.getByName("");
-            socket = new DatagramSocket();
+            sendTo= InetAddress.getByName("192.168.0.27");
+            socket = new DatagramSocket(4040);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        new Receiver().start();
+        reciever = new Receiver();
+        reciever.start();
+        noStroke();
+        background(150);
     }
 
     @Override
     public void draw() {
+        fill(0);
+        ellipse(reciever.other.x,reciever.other.y,10,10);
+        fill(255);
         if(mousePressed) {
             ellipse(mouseX,mouseY,10,10);
             String message = mouseX + "," + mouseY;
-            DatagramPacket packet = new DatagramPacket(message.getBytes(),message.length(),sendTo,4040);
+            DatagramPacket packet = new DatagramPacket(message.getBytes(),message.length(),sendTo,4041);
             try {
                 socket.send(packet);
             } catch (IOException e) {
