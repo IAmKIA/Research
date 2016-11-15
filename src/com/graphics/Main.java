@@ -1,3 +1,5 @@
+package com.graphics;
+
 import processing.core.PApplet;
 
 import java.io.IOException;
@@ -10,7 +12,7 @@ public class Main extends PApplet{
     DatagramSocket socket;
     Receiver reciever;
     public static void main(String[] args) {
-        PApplet.main("Main");
+        PApplet.main("com.graphics.Main");
     }
 
     @Override
@@ -22,7 +24,7 @@ public class Main extends PApplet{
     @Override
     public void setup() {
         try {
-            sendTo= InetAddress.getByName("192.168.0.27");
+            sendTo= InetAddress.getByName("172.25.90.69");
             socket = new DatagramSocket(4040);
         } catch (Exception e) {
             e.printStackTrace();

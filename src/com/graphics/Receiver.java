@@ -1,3 +1,5 @@
+package com.graphics;
+
 import com.sun.javafx.geom.Vec2f;
 
 import java.io.IOException;
@@ -9,7 +11,7 @@ public class Receiver extends Thread{
     DatagramSocket socket;
     Vec2f other;
     public Receiver() {
-        super("Receiver");
+        super("com.graphics.Receiver");
         other = new Vec2f(0,0);
         try {
             socket = new DatagramSocket(4041);
