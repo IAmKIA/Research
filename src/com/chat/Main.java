@@ -22,7 +22,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
         while(!input.equals("end")){
-            System.out.println(input);
             DatagramPacket packet = new DatagramPacket(input.getBytes(),input.length(),sendTo,4041);
             try {
                 socket.send(packet);
