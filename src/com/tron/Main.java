@@ -29,7 +29,7 @@ public class Main extends PApplet{
         player1 = new Player(color(100,100,200),new PVector(150,150),new PVector(1,0));
         player2 = new Player(color(200,100,100),new PVector(550,550),new PVector(-1,0));
         try {
-            sendTo= InetAddress.getByName("localhost");
+            sendTo= InetAddress.getByName("172.25.46.247");
             socket = new DatagramSocket(4040);
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,7 +48,7 @@ public class Main extends PApplet{
             ellipse(player2.trail[i].x,player2.trail[i].y,5,5);
         }
         if(receiver.other!=null) {
-            player2.dir = receiver.other;
+            player1.dir = receiver.other;
         }
         player1.shiftTrail();
         player2.shiftTrail();
@@ -57,10 +57,10 @@ public class Main extends PApplet{
     @Override
     public void keyPressed() {
         switch (key){
-            case 'w': player1.dir = new PVector(0,-1);break;
-            case 'a': player1.dir = new PVector(-1,0);break;
-            case 's': player1.dir = new PVector(0,1);break;
-            case 'd': player1.dir = new PVector(1,0);
+            case 'w': player2.dir = new PVector(0,-1);break;
+            case 'a': player2.dir = new PVector(-1,0);break;
+            case 's': player2.dir = new PVector(0,1);break;
+            case 'd': player2.dir = new PVector(1,0);
         }
         try {
             socket.send(new DatagramPacket((key+"").getBytes(),1,sendTo,4041));
